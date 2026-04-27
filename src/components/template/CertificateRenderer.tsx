@@ -7,6 +7,7 @@ import styles from './Certificate.module.css';
 export const CertificateRenderer = forwardRef<HTMLDivElement>((props, ref) => {
   const {
     templateType,
+    documentType,
     title,
     degree,
     department,
