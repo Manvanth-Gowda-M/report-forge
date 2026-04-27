@@ -1,0 +1,136 @@
+.a4Page {
+  width: 210mm;
+  height: 297mm;
+  padding: 10mm;
+  margin: 0 auto;
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Times New Roman', Times, serif;
+  color: black;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  line-height: 1.3;
+  page-break-after: always;
+}
+
+@media print {
+  .a4Page {
+    margin: 0;
+    box-shadow: none;
+    border: none;
+    width: 210mm;
+    height: 297mm;
+    page-break-after: always;
+  }
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  border: 3px solid black;
+  padding: 8mm;
+}
+
+.headerCollege {
+  color: #1f385f;
+  font-size: 16pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 1mm;
+}
+
+.headerAddress {
+  color: #000000;
+  font-size: 11pt;
+  font-weight: bold;
+  margin-bottom: 2mm;
+}
+
+.headerAffiliation {
+  color: #000000;
+  font-size: 11pt;
+  font-weight: bold;
+  margin-bottom: 4mm;
+}
+
+.deptRed {
+  color: #c00000;
+  font-size: 13pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 8mm;
+}
+
+.certTitle {
+  color: #0000ff; /* The 0xff is blue */
+  font-size: 15pt;
+  font-weight: bold;
+  margin-bottom: 6mm;
+  text-decoration: underline;
+}
+
+.certParagraph {
+  font-size: 13pt;
+  text-align: justify;
+  line-height: 1.6;
+  margin-bottom: 10mm;
+  width: 100%;
+  padding: 0 10mm;
+}
+
+.boldText {
+  font-weight: bold;
+}
+
+.signatureGrid {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 5mm;
+  margin-top: auto;
+  margin-bottom: 8mm;
+}
+
+.sigCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sigLabel {
+  font-size: 12pt;
+  margin-bottom: 8mm;
+}
+
+.sigName {
+  font-size: 12pt;
+  font-weight: bold;
+}
+
+.sigDesig {
+  font-size: 12pt;
+  font-weight: bold;
+}
+
+.footerCollege {
+  font-size: 11pt;
+  color: #2d74b5;
+  font-weight: bold;
+  margin-top: auto;
+  margin-bottom: 1mm;
+}
+
+.footerAddress {
+  font-size: 11pt;
+  color: #2d74b5;
+  margin-bottom: 1mm;
+}
+
+.footerYear {
+  font-size: 10pt;
+  color: #2d74b5;
+}

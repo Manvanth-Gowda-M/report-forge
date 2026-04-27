@@ -1,0 +1,212 @@
+.a4Page {
+  width: 210mm;
+  height: 297mm;
+  padding: 15mm 20mm;
+  margin: 0 auto;
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Times New Roman', Times, serif;
+  color: black;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  line-height: 1.3;
+}
+
+@media print {
+  .a4Page {
+    margin: 0;
+    box-shadow: none;
+    border: none;
+    width: 210mm;
+    height: 297mm;
+    page-break-after: always;
+  }
+  @page {
+    size: A4;
+    margin: 0;
+  }
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  border: 3px solid black;
+  padding: 10mm;
+}
+
+.vtuName {
+  color: #ff0000;
+  font-size: 16pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 2mm;
+}
+
+.vtuAddress {
+  color: #000000;
+  font-size: 12pt;
+  margin-bottom: 4mm;
+}
+
+.vtuLogo {
+  width: 30mm;
+  height: 30mm;
+  object-fit: contain;
+  margin-bottom: 2mm;
+}
+
+.reportType {
+  color: #365f91;
+  font-size: 14pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 2mm;
+}
+
+.onText {
+  color: #365f91;
+  font-size: 14pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 4mm;
+}
+
+.title {
+  color: #ff0000;
+  font-size: 14pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 4mm;
+  max-width: 150mm;
+}
+
+.fulfillment {
+  color: #000000;
+  font-size: 12pt;
+  margin-bottom: 2mm;
+  max-width: 160mm;
+}
+
+.degree {
+  color: #1f487c;
+  font-size: 12pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 2mm;
+}
+
+.inText {
+  color: #1f487c;
+  font-size: 12pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 2mm;
+}
+
+.departmentBold {
+  color: #1f487c;
+  font-size: 12pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 8mm;
+}
+
+.submittedBy {
+  color: #00ae50;
+  font-size: 14pt;
+  margin-bottom: 4mm;
+}
+
+/* Students */
+.studentBlock {
+  display: flex;
+  justify-content: space-between;
+  width: 90mm;
+  margin-bottom: 2mm;
+}
+.studentName {
+  color: #000000;
+  font-size: 14pt;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.studentUsn {
+  color: #000000;
+  font-size: 14pt;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.guideSection {
+  margin-top: 4mm;
+  width: 100%;
+}
+.underGuide {
+  color: #00ae50;
+  font-size: 14pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 4mm;
+}
+
+.guideGrid {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 10mm;
+}
+.guideCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.guideName {
+  color: #000000;
+  font-size: 12pt;
+  font-weight: bold;
+}
+.guideDesig {
+  color: #000000;
+  font-size: 12pt;
+  font-weight: bold;
+}
+
+.bottomSection {
+  margin-top: auto; /* Pushes to bottom */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.collegeLogo {
+  width: 30mm;
+  height: 30mm;
+  object-fit: contain;
+  margin-bottom: 2mm;
+}
+
+.deptRed {
+  color: #ff0000;
+  font-size: 14pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 2mm;
+}
+
+.collegeBlue {
+  color: #00aeee;
+  font-size: 14pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 2mm;
+}
+
+.yearRed {
+  color: #ec0000;
+  font-size: 14pt;
+  font-weight: bold;
+}
