@@ -120,6 +120,17 @@ export const SidebarForm = () => {
                   />
                   Acknowledgement
                 </label>
+                {store.templateType === 'team' && (
+                  <label className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={store.includeTOC}
+                      onChange={(e) => store.updateField('includeTOC', e.target.checked)}
+                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    />
+                    Table of Contents
+                  </label>
+                )}
               </div>
             </div>
           </div>
@@ -359,6 +370,52 @@ export const SidebarForm = () => {
             </div>
           </div>
         </AccordionItem>
+
+        {/* Table of Contents Section — team only */}
+        {store.templateType === 'team' && store.includeTOC && (
+          <AccordionItem title="Table of Contents" defaultOpen={false}>
+            <div className="space-y-3">
+              {store.tocEntries.map((entry, index) => (
+                <div key={entry.id} className="flex gap-2 items-start bg-gray-50 dark:bg-gray-800/50 p-2 rounded border border-gray-200 dark:border-gray-700">
+                  <div className="flex-1 space-y-1">
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value={entry.chapter}
+                        onChange={(e) => store.updateTocEntry(entry.id, 'chapter', e.target.value)}
+                        placeholder="Ch."
+                        className="w-12 px-2 py-1 text-xs border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-1 focus:ring-blue-500 outline-none text-center"
+                      />
+                      <input
+                        type="text"
+                        value={entry.content}
+                        onChange={(e) => store.updateTocEntry(entry.id, 'content', e.target.value)}
+                        placeholder={`Chapter ${index + 1} Title`}
+                        className="flex-1 px-2 py-1 text-xs border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-1 focus:ring-blue-500 outline-none uppercase"
+                      />
+                      <input
+                        type="text"
+                        value={entry.pages}
+                        onChange={(e) => store.updateTocEntry(entry.id, 'pages', e.target.value)}
+                        placeholder="Pg."
+                        className="w-14 px-2 py-1 text-xs border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-1 focus:ring-blue-500 outline-none text-center"
+                      />
+                    </div>
+                  </div>
+                  <button onClick={() => store.removeTocEntry(entry.id)} className="mt-1 text-red-500 hover:text-red-700 p-1">
+                    <Trash2 size={14} />
+                  </button>
+                </div>
+              ))}
+              <button
+                onClick={store.addTocEntry}
+                className="w-full py-2 border border-dashed border-gray-300 dark:border-gray-700 rounded text-xs flex justify-center items-center gap-1 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
+              >
+                <Plus size={14} /> Add Chapter
+              </button>
+            </div>
+          </AccordionItem>
+        )}
 
       </div>
     </div>
