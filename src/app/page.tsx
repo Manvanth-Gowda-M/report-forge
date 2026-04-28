@@ -16,7 +16,7 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-screen w-screen bg-white dark:bg-gray-950 flex-col md:flex-row md:h-screen md:overflow-hidden">
+    <main className="flex min-h-screen w-screen bg-white dark:bg-gray-950 flex-col md:flex-row md:h-screen md:overflow-hidden overflow-x-hidden">
       {/* Left Sidebar */}
       <div className="w-full md:w-[400px] lg:w-[450px] flex-shrink-0 md:h-full shadow-xl z-20 md:border-r border-gray-200 dark:border-gray-800 md:overflow-y-auto">
         <SidebarForm />

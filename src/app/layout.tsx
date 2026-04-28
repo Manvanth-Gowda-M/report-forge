@@ -29,7 +29,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body 
-        className="h-screen w-screen overflow-hidden text-gray-900 bg-white dark:text-gray-100 dark:bg-gray-950"
+        className="min-h-screen w-screen text-gray-900 bg-white dark:text-gray-100 dark:bg-gray-950"
         suppressHydrationWarning
       >
         {children}
