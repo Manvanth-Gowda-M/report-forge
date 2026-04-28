@@ -18,6 +18,8 @@ export const FrontPageRenderer = forwardRef<HTMLDivElement>((props, ref) => {
     vtuAddress,
     fulfillmentText,
     academicYear,
+    subjectName,
+    subjectCode,
     students,
     guide,
     hod,
@@ -38,6 +40,12 @@ export const FrontPageRenderer = forwardRef<HTMLDivElement>((props, ref) => {
         <div className={styles.reportType}>{subtitle || (documentType === 'synopsis' ? 'A SYNOPSIS ON' : 'A COURSE PROJECT REPORT')}</div>
         <div className={styles.onText}>On</div>
         <div className={styles.title}>"{title || 'PROJECT TITLE'}"</div>
+
+        {(subjectName || subjectCode) && (
+          <div className={styles.subjectLine}>
+            {subjectName}{subjectName && subjectCode ? ' ' : ''}{subjectCode ? `(${subjectCode})` : ''}
+          </div>
+        )}
         
         <div className={styles.fulfillment}>
           {fulfillmentText || `Submitted in partial fulfillment of the requirements for the award of ${degree || 'B.E.'} in Computer Science and Engineering Degree`}

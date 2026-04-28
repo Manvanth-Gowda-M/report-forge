@@ -72,7 +72,7 @@ const createSampleSingle = (docType: DocumentType = 'report') => ({
   documentType: docType,
   includeCertificate: true,
   includeAcknowledgement: true,
-  includeHOD: false,
+  includeHOD: true,
   vtuName: 'VISVESVARAYA TECHNOLOGICAL UNIVERSITY',
   vtuAddress: '“JNANA SANGAMA” BELGAUM – 590018',
   title: 'ARTIFICIAL INTELLIGENCE BASED DIAGNOSIS SYSTEM',
