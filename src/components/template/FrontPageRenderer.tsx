@@ -64,7 +64,7 @@ export const FrontPageRenderer = forwardRef<HTMLDivElement>((props, ref) => {
             {students.map((student, index) => (
               <div key={student.id} className={styles.studentBlock}>
                 <span className={styles.studentName}>{student.name || `STUDENT ${index + 1}`}</span>
-                <span className={styles.studentUsn}>({student.usn || 'USN'})</span>
+                <span className={styles.studentUsn}>{student.usn || 'USN'}</span>
               </div>
             ))}
           </div>

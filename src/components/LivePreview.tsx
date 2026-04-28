@@ -5,6 +5,7 @@ import { useReactToPrint } from 'react-to-print';
 import { FrontPageRenderer } from './template/FrontPageRenderer';
 import { CertificateRenderer } from './template/CertificateRenderer';
 import { AcknowledgementRenderer } from './template/AcknowledgementRenderer';
+import { TableOfContentsRenderer } from './template/TableOfContentsRenderer';
 import { Download, ZoomIn, ZoomOut, Maximize } from 'lucide-react';
 import { useReportStore } from '@/store/useReportStore';
 
@@ -12,7 +13,7 @@ export const LivePreview = () => {
   const printRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(0.8);
-  const { documentType, includeCertificate, includeAcknowledgement } = useReportStore();
+  const { documentType, templateType, includeCertificate, includeAcknowledgement, includeTOC } = useReportStore();
 
   const handlePrint = useReactToPrint({
     contentRef: printRef,
@@ -103,6 +104,7 @@ export const LivePreview = () => {
               <>
                 {includeCertificate && <CertificateRenderer />}
                 {includeAcknowledgement && <AcknowledgementRenderer />}
+                {templateType === 'team' && includeTOC && <TableOfContentsRenderer />}
               </>
             )}
           </div>

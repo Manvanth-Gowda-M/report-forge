@@ -15,6 +15,13 @@ export interface Guide {
   designation: string;
 }
 
+export interface TocEntry {
+  id: string;
+  chapter: string;
+  content: string;
+  pages: string;
+}
+
 export interface ReportState {
   isEditing: boolean;
   templateType: TemplateType;
@@ -24,6 +31,7 @@ export interface ReportState {
   includeCertificate: boolean;
   includeAcknowledgement: boolean;
   includeHOD: boolean;
+  includeTOC: boolean;
   vtuName: string;
   vtuAddress: string;
   title: string;
@@ -42,18 +50,22 @@ export interface ReportState {
   students: Student[];
   guide: Guide;
   hod: Guide;
+  tocEntries: TocEntry[];
   
   // Actions
   setIsEditing: (isEditing: boolean) => void;
   setTemplateType: (type: TemplateType) => void;
   setDocumentType: (type: DocumentType) => void;
-  updateField: (field: keyof Omit<ReportState, 'isEditing' | 'templateType' | 'documentType' | 'students' | 'guide' | 'hod' | 'setIsEditing' | 'setTemplateType' | 'setDocumentType' | 'updateField' | 'updateGuide' | 'updateHOD' | 'addStudent' | 'updateStudent' | 'removeStudent' | 'moveStudent' | 'loadSampleData'>, value: string | boolean) => void;
+  updateField: (field: keyof Omit<ReportState, 'isEditing' | 'templateType' | 'documentType' | 'students' | 'guide' | 'hod' | 'tocEntries' | 'setIsEditing' | 'setTemplateType' | 'setDocumentType' | 'updateField' | 'updateGuide' | 'updateHOD' | 'addStudent' | 'updateStudent' | 'removeStudent' | 'moveStudent' | 'loadSampleData' | 'addTocEntry' | 'updateTocEntry' | 'removeTocEntry'>, value: string | boolean) => void;
   updateGuide: (field: keyof Guide, value: string) => void;
   updateHOD: (field: keyof Guide, value: string) => void;
   addStudent: () => void;
   updateStudent: (id: string, field: keyof Omit<Student, 'id'>, value: string) => void;
   removeStudent: (id: string) => void;
   moveStudent: (dragIndex: number, hoverIndex: number) => void;
+  addTocEntry: () => void;
+  updateTocEntry: (id: string, field: keyof Omit<TocEntry, 'id'>, value: string) => void;
+  removeTocEntry: (id: string) => void;
   loadSampleData: (type: TemplateType, docType?: DocumentType) => void;
 }
 
@@ -67,12 +79,25 @@ const getSampleFulfillment = (docType: DocumentType) => docType === 'synopsis'
   ? 'Submitted in partial fulfillment of the requirements for the award of B.E. in Computer Science and Engineering Degree'
   : 'Submitted in partial fulfillment of the requirements for the award of B.E. in Computer Science and Engineering Degree';
 
+const defaultTocEntries: TocEntry[] = [
+  { id: '1', chapter: '1', content: 'INTRODUCTION', pages: '1-2' },
+  { id: '2', chapter: '2', content: 'DESIGN', pages: '3-4' },
+  { id: '3', chapter: '3', content: 'DEVELOPMENT', pages: '5-6' },
+  { id: '4', chapter: '4', content: 'IMPLEMENTATION', pages: '7-8' },
+  { id: '5', chapter: '5', content: 'RESULT AND SCREENSHOT', pages: '9-10' },
+  { id: '6', chapter: '6', content: 'ADVANTAGES AND DISADVANTAGES', pages: '11-12' },
+  { id: '7', chapter: '7', content: 'APPLICATIONS', pages: '13' },
+  { id: '8', chapter: '8', content: 'CONCLUSION', pages: '14' },
+  { id: '9', chapter: '9', content: 'FUTURE AND ENHANCEMENTS', pages: '15' },
+];
+
 const createSampleSingle = (docType: DocumentType = 'report') => ({
   templateType: 'single' as TemplateType,
   documentType: docType,
   includeCertificate: true,
   includeAcknowledgement: true,
   includeHOD: true,
+  includeTOC: false,
   vtuName: 'VISVESVARAYA TECHNOLOGICAL UNIVERSITY',
   vtuAddress: '“JNANA SANGAMA” BELGAUM – 590018',
   title: 'ARTIFICIAL INTELLIGENCE BASED DIAGNOSIS SYSTEM',
@@ -91,7 +116,8 @@ const createSampleSingle = (docType: DocumentType = 'report') => ({
     { id: generateId(), name: 'JOHN DOE', usn: '1XY20CS001' }
   ],
   guide: { name: 'Dr. Jane Smith', designation: 'Professor' },
-  hod: { name: 'Dr. Alan Turing', designation: 'Professor & Head' }
+  hod: { name: 'Dr. Alan Turing', designation: 'Professor & Head' },
+  tocEntries: defaultTocEntries.map(e => ({ ...e, id: generateId() })),
 });
 
 const createSampleTeam = (docType: DocumentType = 'report') => ({
@@ -100,6 +126,7 @@ const createSampleTeam = (docType: DocumentType = 'report') => ({
   includeCertificate: true,
   includeAcknowledgement: true,
   includeHOD: true,
+  includeTOC: true,
   vtuName: 'VISVESVARAYA TECHNOLOGICAL UNIVERSITY',
   vtuAddress: '“JNANA SANGAMA” BELGAUM – 590018',
   title: 'MACHINE LEARNING FOR PREDICTIVE MAINTENANCE',
@@ -121,7 +148,8 @@ const createSampleTeam = (docType: DocumentType = 'report') => ({
     { id: generateId(), name: 'DIANA EVANS', usn: '1XY20CS004' }
   ],
   guide: { name: 'Dr. Robert Clark', designation: 'Associate Professor' },
-  hod: { name: 'Dr. Alan Turing', designation: 'Professor & Head' }
+  hod: { name: 'Dr. Alan Turing', designation: 'Professor & Head' },
+  tocEntries: defaultTocEntries.map(e => ({ ...e, id: generateId() })),
 });
 
 export const useReportStore = create<ReportState>()(
@@ -134,6 +162,7 @@ export const useReportStore = create<ReportState>()(
       includeCertificate: true,
       includeAcknowledgement: true,
       includeHOD: true,
+      includeTOC: false,
       vtuName: 'VISVESVARAYA TECHNOLOGICAL UNIVERSITY',
       vtuAddress: '“JNANA SANGAMA” BELGAUM – 590018',
       title: '',
@@ -151,6 +180,7 @@ export const useReportStore = create<ReportState>()(
       students: [{ id: generateId(), name: '', usn: '' }],
       guide: { ...initialGuide },
       hod: { ...initialHod },
+      tocEntries: defaultTocEntries.map(e => ({ ...e, id: generateId() })),
 
       setIsEditing: (isEditing) => set({ isEditing }),
       
@@ -199,6 +229,20 @@ export const useReportStore = create<ReportState>()(
         return { students: newStudents };
       }),
       
+      addTocEntry: () => set((state) => ({
+        tocEntries: [...state.tocEntries, { id: generateId(), chapter: String(state.tocEntries.length + 1), content: '', pages: '' }]
+      })),
+
+      updateTocEntry: (id, field, value) => set((state) => ({
+        tocEntries: state.tocEntries.map((entry) =>
+          entry.id === id ? { ...entry, [field]: value } : entry
+        )
+      })),
+
+      removeTocEntry: (id) => set((state) => ({
+        tocEntries: state.tocEntries.filter((entry) => entry.id !== id)
+      })),
+
       loadSampleData: (type, docType) => set((state) => {
         const finalDocType = docType || state.documentType;
         return type === 'single' ? createSampleSingle(finalDocType) : createSampleTeam(finalDocType);
