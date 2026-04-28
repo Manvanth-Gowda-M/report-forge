@@ -52,7 +52,7 @@ export const CertificateRenderer = forwardRef<HTMLDivElement>((props, ref) => {
         {/* Signatures */}
         <div className={styles.signatureGrid} style={templateType === 'team' ? { justifyContent: 'space-between' } : {}}>
           <div className={styles.sigCol}>
-            <div className={styles.sigLabel}>Signature of Guide</div>
+            <div className={styles.sigLabel}>Name & Signature of Guide</div>
             <div className={styles.sigName}>{guide.name || 'GUIDE NAME'}</div>
             <div className={styles.sigDesig}>{guide.designation || 'Assistant Professor'}</div>
             <div className={styles.sigDesig}>Dept of {department ? department.split(' ').map(w => w[0]).join('') : 'CSE'}, {college ? college.split(' ').map(w => w[0]).join('') : 'GECR'}</div>
@@ -60,7 +60,7 @@ export const CertificateRenderer = forwardRef<HTMLDivElement>((props, ref) => {
           
           {includeHOD && (
             <div className={styles.sigCol}>
-              <div className={styles.sigLabel}>Signature of HOD</div>
+              <div className={styles.sigLabel}>Name & Signature of HOD</div>
               <div className={styles.sigName}>{hod.name || 'HOD NAME'}</div>
               <div className={styles.sigDesig}>{hod.designation || 'Head of the Department'}</div>
               <div className={styles.sigDesig}>Dept. of {department ? department.split(' ').map(w => w[0]).join('') : 'CSE'}, {college ? college.split(' ').map(w => w[0]).join('') : 'GECR'}</div>
@@ -69,7 +69,7 @@ export const CertificateRenderer = forwardRef<HTMLDivElement>((props, ref) => {
 
           {templateType === 'team' && (
             <div className={styles.sigCol}>
-              <div className={styles.sigLabel}>Signature of Principal</div>
+              <div className={styles.sigLabel}>Name & Signature of Principal</div>
               <div className={styles.sigName}>{principal || 'PRINCIPAL NAME'}</div>
               <div className={styles.sigDesig}>Principal</div>
               <div className={styles.sigDesig}>{college ? college.split(' ').map(w => w[0]).join('') : 'GECR'}</div>
@@ -77,7 +77,8 @@ export const CertificateRenderer = forwardRef<HTMLDivElement>((props, ref) => {
           )}
         </div>
 
-        {/* Examiners Section */}
+        {/* Examiners Section — shown only for team reports */}
+        {templateType === 'team' && (
         <div style={{ width: '100%', padding: '0 10mm', marginTop: '10mm', display: 'flex', flexDirection: 'column' }}>
           <div style={{ fontWeight: 'bold', fontSize: '14pt', textAlign: 'left', marginBottom: '8mm' }}>Name of the Examiners</div>
           <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
@@ -89,6 +90,7 @@ export const CertificateRenderer = forwardRef<HTMLDivElement>((props, ref) => {
             <div style={{ textAlign: 'right', fontSize: '14pt' }}>..........................................</div>
           </div>
         </div>
+        )}
 
       </div>
     </div>
