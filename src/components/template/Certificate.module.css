@@ -32,6 +32,9 @@
   align-items: center;
   height: 100%;
   border: 3px solid black;
+  border-radius: 4px;
+  outline: 1.5px solid black;
+  outline-offset: -8px;
   padding: 10mm;
 }
 
